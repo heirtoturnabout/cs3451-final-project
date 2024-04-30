@@ -43,10 +43,8 @@ uniform float shininess;    /* object material shininess */
 
 vec2 hash2(vec2 v)
 {
-	vec2 rand = vec2(0, 0);
-    vec3 v3 = fract(vec3(v.xyx) * vec3(.1031, .1030, .0973));
-    v3 += dot(v3, v3.yzx+33.33);
-    return fract((v3.xx+v3.yz)*v3.zy);
+	vec2 rand = vec2(dot(v, vec2(127.1,311.7)), dot(v, vec2(269.5,183.3)));
+    return fract(sin(rand)*18.5453);
 }
 
 float worley_noise(vec2 v) {
