@@ -102,12 +102,13 @@ public:
 
         //// Background Option (2): Programmable Canvas
         //// By default, we load a GT buzz + a number of stars
+        /*
         {
             bgEffect = Add_Interactive_Object<OpenGLBgEffect>();
             bgEffect->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("stars"));
             bgEffect->Add_Texture("tex_buzz", OpenGLTextureLibrary::Get_Texture("buzz_color")); // bgEffect can also Add_Texture
             bgEffect->Initialize();
-        }
+        } */
         
         //// Background Option (3): Sky box
         //// Here we provide a default implementation of a sky box; customize it for your own sky box
@@ -132,6 +133,7 @@ public:
 
         //// Background Option (4): Sky sphere
         //// Here we provide a default implementation of a textured sphere; customize it for your own sky sphere
+        /*
         {
             //// create object by reading an obj mesh
             auto sphere = Add_Obj_Mesh_Object("obj/sphere.obj");
@@ -156,9 +158,10 @@ public:
 
             //// bind shader to object
             sphere->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
-        }
+        } */
 
         //// Here we load a bunny object with the basic shader to show how to add an object into the scene
+        /*
         {
             //// create object by reading an obj mesh
             auto bunny = Add_Obj_Mesh_Object("obj/bunny.obj");
@@ -183,7 +186,7 @@ public:
 
             //// bind shader to object
             bunny->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
-        }
+        } */
 
         //// Here we show an example of adding a mesh with noise-terrain (A6)
         {
@@ -219,6 +222,7 @@ public:
         //// Here we show an example of adding a transparent object with alpha blending
         //// This example will be useful if you implement objects such as tree leaves, grass blades, flower pedals, etc.
         //// Alpha blending will be turned on automatically if your texture has the alpha channel
+        /*
         {
             //// create object by reading an obj mesh
             auto sqad = Add_Obj_Mesh_Object("obj/sqad.obj");
@@ -236,11 +240,12 @@ public:
 
             //// bind shader to object
             sqad->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("blend"));
-        }
+        } */
 
         //// Here we show an example of adding a billboard particle with a star shape using alpha blending
         //// The billboard is rendered with its texture and is always facing the camera.
         //// This example will be useful if you plan to implement a CPU-based particle system.
+        /*
         {
             //// create object by reading an obj mesh
             auto sqad = Add_Obj_Mesh_Object("obj/sqad.obj");
@@ -258,7 +263,7 @@ public:
 
             //// bind shader to object
             sqad->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("billboard"));
-        }
+        } */
 
         //// Here we show an example of shading (ray-tracing) a sphere with environment mapping
         /*
@@ -282,6 +287,7 @@ public:
         //// Here we create a mesh object with two triangle specified using a vertex array and a triangle array.
         //// This is an example showing how to create a mesh object without reading an .obj file. 
         //// If you are creating your own L-system, you may use this function to visualize your mesh.
+        /*
         {
             std::vector<Vector3> vertices = { Vector3(0.5, 0, 0), Vector3(1, 0, 0), Vector3(1, 1, 0), Vector3(0, 1, 0) };
             std::vector<Vector3i> elements = { Vector3i(0, 1, 2), Vector3i(0, 2, 3) };
@@ -300,7 +306,7 @@ public:
             obj->Add_Texture("tex_color", OpenGLTextureLibrary::Get_Texture("buzz_color"));
 
             obj->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
-        }
+        } */
 
         //// This for-loop updates the rendering model for each object on the list
         for (auto &mesh_obj : mesh_object_array){
