@@ -39,6 +39,20 @@ float worley_noise(vec2 v) {
     return dist;
 }
 
+float perlin_noise(vec2 v)
+{
+	// Your implementation starts here
+
+    float noise = 0;
+    vec2 i = floor(v);
+    vec2 f = fract(v);
+    vec2 m = f * f * (3.0 - 2.0 * f);
+
+    noise = mix(mix(dot(hash2(i + vec2(0.0, 0.0)), f - vec2(0.0, 0.0)), dot(hash2(i + vec2(1.0, 0.0)), f - vec2(1.0, 0.0)), m.x), mix(dot(hash2(i + vec2(0.0, 1.0)), f - vec2(0.0, 1.0)), dot(hash2(i + vec2(1.0, 1.0)), f - vec2(1.0, 1.0)), m.x), m.y);
+	// Your implementation ends here
+    return noise;
+} 
+
 float noiseOctave(vec2 v, int num)
 {
     float sum = 0;

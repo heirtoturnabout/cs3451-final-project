@@ -52,7 +52,12 @@ public:
         OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/stars.vert", "shaders/stars.frag", "stars");
         OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/basic.vert", "shaders/alphablend.frag", "blend");
         OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/billboard.vert", "shaders/alphablend.frag", "billboard");
-        OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/terrain.vert", "shaders/terrain.frag", "terrain");
+        //river
+        OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/terrain.vert", "shaders/terrain.frag", "river");
+        //mountain
+        OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/terrain2.vert", "shaders/terrain2.frag", "mountain");
+
+        //river
         OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/skybox.vert", "shaders/skybox.frag", "skybox");
 
         //// Load all the textures you need for the scene
@@ -191,32 +196,92 @@ public:
         //// Here we show an example of adding a mesh with noise-terrain (A6)
         {
             //// create object by reading an obj mesh
-            auto terrain = Add_Obj_Mesh_Object("obj/plane.obj");
+            auto terrain1 = Add_Obj_Mesh_Object("obj/plane.obj");
 
             //// set object's transform
             Matrix4f r, s, t;
             r << 1, 0, 0, 0,
-                0, 0.5, 0.67, 0,
-                0, -0.67, 0.5, 0,
+                0, 0, 1, 0,
+                0, -1, 0, 0,
                 0, 0, 0, 1;
-            s << 0.5, 0, 0, 0,
-                0, 0.5, 0, 0,
-                0, 0, 0.5, 0,
+            s << 2, 0, 0, 0,
+                0, 2, 0, 0,
+                0, 0, 2, 0,
                 0, 0, 0, 1;
-            t << 1, 0, 0, -2,
-                 0, 1, 0, 0.5,
+            t << 1, 0, 0, -5,
+                 0, 1, 0, -6,
                  0, 0, 1, 0,
                  0, 0, 0, 1,
-            terrain->Set_Model_Matrix(t * s * r);
+            terrain1->Set_Model_Matrix(t * s * r);
 
             //// set object's material
-            terrain->Set_Ka(Vector3f(0.1f, 0.1f, 0.1f));
-            terrain->Set_Kd(Vector3f(0.7f, 0.7f, 0.7f));
-            terrain->Set_Ks(Vector3f(1, 1, 1));
-            terrain->Set_Shininess(128.f);
+            terrain1->Set_Ka(Vector3f(0.1f, 0.1f, 0.1f));
+            terrain1->Set_Kd(Vector3f(0.7f, 0.7f, 0.7f));
+            terrain1->Set_Ks(Vector3f(1, 1, 1));
+            terrain1->Set_Shininess(128.f);
 
             //// bind shader to object (we do not bind texture for this object because we create noise for texture)
-            terrain->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("terrain"));
+            terrain1->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("river"));
+        }
+
+        {
+            //// create object by reading an obj mesh
+            auto terrain2 = Add_Obj_Mesh_Object("obj/plane.obj");
+
+            //// set object's transform
+            Matrix4f r, s, t;
+            r << 1, 0, 0, 0,
+                0, 0, 1, 0,
+                0, -1, 0, 0,
+                0, 0, 0, 1;
+            s << 2, 0, 0, 0,
+                0, 2, 0, 0,
+                0, 0, 2, 0,
+                0, 0, 0, 1;
+            t << 1, 0, 0, -7,
+                 0, 1, 0, -6,
+                 0, 0, 1, 0,
+                 0, 0, 0, 1,
+            terrain2->Set_Model_Matrix(t * s * r);
+
+            //// set object's material
+            terrain2->Set_Ka(Vector3f(0.1f, 0.1f, 0.1f));
+            terrain2->Set_Kd(Vector3f(0.7f, 0.7f, 0.7f));
+            terrain2->Set_Ks(Vector3f(1, 1, 1));
+            terrain2->Set_Shininess(128.f);
+
+            //// bind shader to object (we do not bind texture for this object because we create noise for texture)
+            terrain2->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("river"));
+        }
+
+        {
+            //// create object by reading an obj mesh
+            auto terrain3 = Add_Obj_Mesh_Object("obj/plane.obj");
+
+            //// set object's transform
+            Matrix4f r, s, t;
+            r << 1, 0, 0, 0,
+                0, 0, 1, 0,
+                0, -1, 0, 0,
+                0, 0, 0, 1;
+            s << 2, 0, 0, 0,
+                0, 2, 0, 0,
+                0, 0, 2, 0,
+                0, 0, 0, 1;
+            t << 1, 0, 0, -2,
+                 0, 1, 0, -6,
+                 0, 0, 1, 0,
+                 0, 0, 0, 1,
+            terrain3->Set_Model_Matrix(t * s * r);
+
+            //// set object's material
+            terrain3->Set_Ka(Vector3f(0.1f, 0.1f, 0.1f));
+            terrain3->Set_Kd(Vector3f(0.7f, 0.7f, 0.7f));
+            terrain3->Set_Ks(Vector3f(1, 1, 1));
+            terrain3->Set_Shininess(128.f);
+
+            //// bind shader to object (we do not bind texture for this object because we create noise for texture)
+            terrain3->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("river"));
         }
 
         //// Here we show an example of adding a transparent object with alpha blending
