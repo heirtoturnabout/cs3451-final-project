@@ -24,6 +24,7 @@ vec2 hash2(vec2 v)
     return rand;
 }
 
+
 float perlin_noise(vec2 v)
 {
 	// Your implementation starts here
@@ -36,6 +37,21 @@ float perlin_noise(vec2 v)
     noise = mix(mix(dot(hash2(i + vec2(0.0, 0.0)), f - vec2(0.0, 0.0)), dot(hash2(i + vec2(1.0, 0.0)), f - vec2(1.0, 0.0)), m.x), mix(dot(hash2(i + vec2(0.0, 1.0)), f - vec2(0.0, 1.0)), dot(hash2(i + vec2(1.0, 1.0)), f - vec2(1.0, 1.0)), m.x), m.y);
 	// Your implementation ends here
     return noise;
+} 
+
+float simplex_noise(vec2 v) {
+    const float K1 = 0.366025404; // (sqrt(3)-1)/2;
+    const float K2 = 0.211324865; // (3-sqrt(3))/6;
+
+	vec2  i = floor(v + (v.x + v.y) * K1);
+    vec2  a = v - i + (i.x + i.y) * K2;
+    float m = step(a.y,a.x); 
+    vec2  o = vec2(m,1.0-m);
+    vec2  b = a - o + K2;
+	vec2  c = a - 1.0 + 2.0*K2;
+    vec3  h = max( 0.5-vec3(dot(a,a), dot(b,b), dot(c,c) ), 0.0 );
+	vec3  n = h * h * h * h * vec3( dot(a,hash2(i+0.0)), dot(b,hash2(i+o)), dot(c,hash2(i+1.0)));
+    return dot( n, vec3(70.0) );
 }
 
 float noiseOctave(vec2 v, int num)
@@ -44,7 +60,7 @@ float noiseOctave(vec2 v, int num)
 	// Your implementation starts here
     for(int i = 0; i < num; i++)
     {
-        sum += pow(2, -1 * i) * perlin_noise(pow(2, i) * v);
+        sum += pow(2, -1 * i) * simplex_noise(pow(2, i) * v);
     }
 	// Your implementation ends here
     return sum;
