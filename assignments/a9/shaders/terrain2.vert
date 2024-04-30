@@ -59,7 +59,7 @@ float noiseOctave(vec2 v, int num)
 	// Your implementation starts here
     for(int i = 0; i < num; i++)
     {
-        sum += pow(2, -1 * i) * worley_noise(pow(2, i) * v);
+        sum += pow(2, -1 * i) * perlin_noise(pow(2, i) * v);
     }
 	// Your implementation ends here
     return sum;

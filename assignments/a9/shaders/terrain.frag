@@ -43,12 +43,10 @@ uniform float shininess;    /* object material shininess */
 
 vec2 hash2(vec2 v)
 {
-	vec2 rand = vec2(0,0);
-	
-	rand  = 50.0 * 1.05 * fract(v * 0.3183099 + vec2(0.71, 0.113));
-    rand = -1.0 + 2 * 1.05 * fract(rand.x * rand.y * (rand.x + rand.y) * rand);
-	rand = sin(sin(sin(sin(rand))));
-	return rand;
+	vec2 rand = vec2(0, 0);
+    vec3 v3 = fract(vec3(v.xyx) * vec3(.1031, .1030, .0973));
+    v3 += dot(v3, v3.yzx+33.33);
+    return fract((v3.xx+v3.yz)*v3.zy);
 }
 
 float worley_noise(vec2 v) {
@@ -83,15 +81,19 @@ float perlin_noise(vec2 v)
 float noiseOctave(vec2 v, int num)
 {
 	float sum = 0;
+	float weight = 1.0;
+	float scale = 2.0;
 	for(int i =0; i<num; i++){
-		sum += pow(2,-1*i) * worley_noise(pow(2,i) * v);
+		weight *= 0.5;
+		sum += weight * worley_noise(scale * v + 0.2 * scale);
+		scale *= 1.5;
 	}
 	return sum;
 }
 
 float height(vec2 v){
     float h = 0;
-	h = 0.75 * noiseOctave(v, 10);
+	h = 0.75 * noiseOctave(v, 5);
 	if(h<0) h *= .5;
 	return h * 2.;
 }
@@ -135,7 +137,7 @@ vec3 shading_terrain(vec3 pos) {
 
 	float h = pos.z + .8;
 	h = clamp(h, 0.0, 1.0);
-	vec3 emissiveColor = mix(vec3(.4,.6,.2), vec3(.4,.3,.2), h);
+	vec3 emissiveColor = mix(vec3(0,0,0.8), vec3(0,0,0.8), h);
 
 	return color * emissiveColor;
 }

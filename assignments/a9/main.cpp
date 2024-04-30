@@ -56,8 +56,6 @@ public:
         OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/terrain.vert", "shaders/terrain.frag", "river");
         //mountain
         OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/terrain2.vert", "shaders/terrain2.frag", "mountain");
-
-        //river
         OpenGLShaderLibrary::Instance()->Add_Shader_From_File("shaders/skybox.vert", "shaders/skybox.frag", "skybox");
 
         //// Load all the textures you need for the scene
@@ -204,12 +202,12 @@ public:
                 0, 0, 1, 0,
                 0, -1, 0, 0,
                 0, 0, 0, 1;
-            s << 2, 0, 0, 0,
-                0, 2, 0, 0,
+            s << 0.7, 0, 0, 0,
+                0, 0.6, 0, 0,
                 0, 0, 2, 0,
                 0, 0, 0, 1;
-            t << 1, 0, 0, -5,
-                 0, 1, 0, -6,
+            t << 1, 0, 0, 5,
+                 0, 1, 0, -6.5,
                  0, 0, 1, 0,
                  0, 0, 0, 1,
             terrain1->Set_Model_Matrix(t * s * r);
@@ -238,7 +236,7 @@ public:
                 0, 2, 0, 0,
                 0, 0, 2, 0,
                 0, 0, 0, 1;
-            t << 1, 0, 0, -7,
+            t << 1, 0, 0, -4.8,
                  0, 1, 0, -6,
                  0, 0, 1, 0,
                  0, 0, 0, 1,
@@ -251,7 +249,7 @@ public:
             terrain2->Set_Shininess(128.f);
 
             //// bind shader to object (we do not bind texture for this object because we create noise for texture)
-            terrain2->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("river"));
+            terrain2->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("mountain"));
         }
 
         {
@@ -268,7 +266,7 @@ public:
                 0, 2, 0, 0,
                 0, 0, 2, 0,
                 0, 0, 0, 1;
-            t << 1, 0, 0, -2,
+            t << 1, 0, 0, 7.8,
                  0, 1, 0, -6,
                  0, 0, 1, 0,
                  0, 0, 0, 1,
@@ -281,7 +279,7 @@ public:
             terrain3->Set_Shininess(128.f);
 
             //// bind shader to object (we do not bind texture for this object because we create noise for texture)
-            terrain3->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("river"));
+            terrain3->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("mountain"));
         }
 
         //// Here we show an example of adding a transparent object with alpha blending
