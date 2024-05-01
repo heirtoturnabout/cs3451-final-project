@@ -45,9 +45,9 @@ vec2 hash2(vec2 v)
 {
 	vec2 rand = vec2(0,0);
 	
-	rand  = 50.0 * 1.05 * fract(v * 0.3183099 + vec2(0.71, 0.113));
-    rand = -1.0 + 2 * 1.05 * fract(rand.x * rand.y * (rand.x + rand.y) * rand);
-	rand = sin(sin(sin(sin(rand))));
+	rand = 20.0 * 1.05 * fract(v * 0.3183099 + vec2(0.71, 0.113));
+    rand = -1.0 + 2 * 1.05 * fract(rand.x * rand.x * (rand.y + rand.y) * rand);
+    rand = ((sin(rand)));
 	return rand;
 }
 
@@ -135,7 +135,7 @@ vec3 shading_terrain(vec3 pos) {
 
 	float h = pos.z + .8;
 	h = clamp(h, 0.0, 1.0);
-	vec3 emissiveColor = mix(vec3(.4,.6,.2), vec3(.4,.3,.2), h);
+	vec3 emissiveColor = mix(vec3(.7,.2,.2), vec3(.4,.6,.2), h);
 
 	return color * emissiveColor;
 }

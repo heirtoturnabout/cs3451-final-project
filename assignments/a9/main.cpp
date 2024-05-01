@@ -115,7 +115,7 @@ public:
         
         //// Background Option (3): Sky box
         //// Here we provide a default implementation of a sky box; customize it for your own sky box
-        /*
+        
         {
             // from https://www.humus.name/index.php?page=Textures
             const std::vector<std::string> cubemap_files{
@@ -132,7 +132,6 @@ public:
             skybox->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("skybox"));
             skybox->Initialize();
         }
-        */
 
         //// Background Option (4): Sky sphere
         //// Here we provide a default implementation of a textured sphere; customize it for your own sky sphere
@@ -164,18 +163,22 @@ public:
         } */
 
         //// Here we load a bunny object with the basic shader to show how to add an object into the scene
-        /*
+        
         {
             //// create object by reading an obj mesh
             auto bunny = Add_Obj_Mesh_Object("obj/bunny.obj");
 
             //// set object's transform
-            Matrix4f t;
-            t << 1, 0, 0, 1.5,
-                0, 1, 0, 0,
-                0, 0, 1, 0,
+            Matrix4f s, t;
+            s << 0.3, 0, 0, 0,
+                0, 0.3, 0, 0,
+                0, 0, 0.3, 0,
                 0, 0, 0, 1;
-            bunny->Set_Model_Matrix(t);
+            t << 1, 0, 0, 4,
+                 0, 1, 0, -18,
+                 0, 0, 1, -5,
+                 0, 0, 0, 1,
+            bunny->Set_Model_Matrix(s * t);
 
             //// set object's material
             bunny->Set_Ka(Vector3f(0.1, 0.1, 0.1));
@@ -189,7 +192,7 @@ public:
 
             //// bind shader to object
             bunny->Add_Shader_Program(OpenGLShaderLibrary::Get_Shader("basic"));
-        } */
+        }
 
         //// Here we show an example of adding a mesh with noise-terrain (A6)
         {
@@ -206,7 +209,7 @@ public:
                 0, 0.6, 0, 0,
                 0, 0, 2, 0,
                 0, 0, 0, 1;
-            t << 1, 0, 0, 4.78,
+            t << 1, 0, 0, 4.7,
                  0, 1, 0, -6.5,
                  0, 0, 1, 0,
                  0, 0, 0, 1,
@@ -266,7 +269,7 @@ public:
                 0, 2, 0, 0,
                 0, 0, 2, 0,
                 0, 0, 0, 1;
-            t << 1, 0, 0, 7.8,
+            t << 1, 0, 0, 7.5,
                  0, 1, 0, -6,
                  0, 0, 1, 0,
                  0, 0, 0, 1,

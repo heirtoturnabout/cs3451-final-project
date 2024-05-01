@@ -12,16 +12,12 @@ layout(std140) uniform camera
 
 vec2 hash2(vec2 v)
 {
-    vec2 rand = vec2(0, 0);
-
-	// Your implementation starts here
-
-	// example hash function
-    rand = 50.0 * 1.05 * fract(v * 0.3183099 + vec2(0.71, 0.113));
-    rand = -1.0 + 2 * 1.05 * fract(rand.x * rand.y * (rand.x + rand.y) * rand);
-	// Your implementation ends here
-    rand = sin(sin(sin(rand)));
-    return rand;
+    vec2 rand = vec2(0,0);
+	
+	rand = 20.0 * 1.05 * fract(v * 0.3183099 + vec2(0.71, 0.113));
+    rand = -1.0 + 2 * 1.05 * fract(rand.x * rand.x * (rand.y + rand.y) * rand);
+    rand = ((sin(rand)));
+	return rand;
 }
 
 float worley_noise(vec2 v) {
